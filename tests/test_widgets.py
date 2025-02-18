@@ -10,17 +10,15 @@ def test_mask_account_card() -> None:
     result: str = mask_account_card(input_string)
 
     if result != expected_output:
-        print(f"Ошибка: Ожидаемый результат '{expected_output}', "
-              f"получено '{result}'")
+        print(f"Ошибка: Ожидаемый результат '{expected_output}', " f"получено '{result}'")
 
     input_string = "Счет 9999888877776666"
     expected_output = "Счет **6666"
     result = mask_account_card(input_string)
 
     if result != expected_output:
-        print(f"Ошибка: Ожидаемый результат '{expected_output}', "
-              f"получено '{result}'")
+        print(f"Ошибка: Ожидаемый результат '{expected_output}', " f"получено '{result}'")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_mask_account_card()

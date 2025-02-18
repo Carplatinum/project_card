@@ -14,11 +14,7 @@ def mask_account_card(info: str) -> str:
     card_type: str = " ".join(parts[:-1])
     number: str = parts[-1]
 
-    if card_type in ["Visa Platinum",
-                     "Maestro",
-                     "MasterCard",
-                     "Visa Classic",
-                     "Visa Gold"]:
+    if card_type in ["Visa Platinum", "Maestro", "MasterCard", "Visa Classic", "Visa Gold"]:
         return f"{card_type} {get_mask_card_number(int(number))}"
     elif card_type == "Счет":
         return f"{card_type} {get_mask_account(int(number))}"
