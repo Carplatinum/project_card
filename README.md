@@ -11,7 +11,7 @@
     """
 2.  Перейдите в директорию проекта:
     """
-    cd C:\Users\ANDRAQ\Desktop\python_work\python_projects\card_bank>
+    cd C:\Users\ANTAQ\Desktop\PythonProjects\PyCharmProjects\project_card>
     """
 3.  Установите зависимости:
     """
