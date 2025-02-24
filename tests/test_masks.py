@@ -1,27 +1,9 @@
 import pytest
-from src.mask import get_mask_card_number, get_mask_account
 
-def get_mask_card_number(card_number):
-    """
-    Маскирует номер карты.
-    Если длина номера карты меньше 16 символов,
-    вызывает исключение ValueError.
-    """
-    if len(str(card_number)) < 16:  # Проверка на короткий номер
-        raise ValueError("Номер карты слишком короткий")
+from src.mask import get_mask_account, get_mask_card_number
 
 
-def get_mask_account(account_number):
-    """
-    Маскирует номер счета.
-    Если длина номера счета меньше 10 символов,
-    вызывает исключение ValueError.
-    """
-    if len(str(account_number)) < 10:  # Проверка на короткий номер
-        raise ValueError("Номер счета слишком короткий")
-
-
-def test_get_mask_account_short():
+def test_get_mask_account_short() -> None:
     """
     Проверка на короткий номер счета.
     """
@@ -29,9 +11,28 @@ def test_get_mask_account_short():
         get_mask_account(12345)
 
 
-def test_get_mask_card_number_short():
+def test_get_mask_card_number_short() -> None:
     """
     Проверка на короткий номер карты.
     """
     with pytest.raises(ValueError):
         get_mask_card_number(1234567890123)
+
+
+# Additional tests to ensure the masking works correctly
+def test_get_mask_card_number() -> None:
+    """
+    Проверка маскирования номера карты.
+    """
+    card_number = 1234567890123456
+    masked_card_number = get_mask_card_number(card_number)
+    assert masked_card_number == "1234 56** **** 3456"
+
+
+def test_get_mask_account() -> None:
+    """
+    Проверка маскирования номера счета.
+    """
+    account_number = 1234567890
+    masked_account_number = get_mask_account(account_number)
+    assert masked_account_number == "**7890"
