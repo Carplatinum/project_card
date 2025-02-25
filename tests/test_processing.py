@@ -1,8 +1,6 @@
-from typing import Dict, List
-
 import pytest
-
 from src.processing import filter_by_state, sort_by_date
+from typing import List, Dict
 
 
 # Фикстура для тестовых данных
@@ -15,7 +13,7 @@ def test_data() -> List[Dict]:
     ]
 
 
-# Фикстура для данных с невалидной датой
+# Фикстура для данных с неверным форматом даты
 @pytest.fixture
 def test_data_invalid_date(test_data: List[Dict]) -> List[Dict]:
     data = test_data.copy()
@@ -31,16 +29,15 @@ def test_data_unknown_state(test_data: List[Dict]) -> List[Dict]:
     return data
 
 
-def test_filter_by_state(test_data: List[Dict]) -> None:
+@pytest.mark.parametrize("state, expected_length", [
+    ('EXECUTED', 2),
+    ('CANCELED', 1),
+    ('UNKNOWN', 0)
+])
+def test_filter_by_state(test_data: List[Dict], state: str, expected_length: int) -> None:
     """Тестирование фильтрации по состоянию."""
-    filtered = filter_by_state(test_data)
-    assert len(filtered) == 2
-
-
-def test_filter_by_state_empty(test_data_unknown_state: List[Dict]) -> None:
-    """Тестирование фильтрации по несуществующему состоянию."""
-    filtered = filter_by_state(test_data_unknown_state, state='UNKNOWN')
-    assert len(filtered) == 1
+    filtered = filter_by_state(test_data, state=state)
+    assert len(filtered) == expected_length
 
 
 @pytest.mark.parametrize("reverse, expected", [
