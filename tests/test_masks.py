@@ -1,8 +1,6 @@
-from typing import Dict, List
-
 import pytest
-
 from src.mask import get_mask_account, get_mask_card_number
+from typing import List, Dict
 
 
 # Фикстура для номеров карт
@@ -51,9 +49,9 @@ def test_get_mask_card_number_standard(card_numbers: List[Dict]) -> None:
     """
     Проверка маскирования номера карты стандартной длины.
     """
-    for card in card_numbers:
-        masked_card_number = get_mask_card_number(card["number"])
-        assert masked_card_number == card["expected"]
+    for data in card_numbers:
+        masked_card_number = get_mask_card_number(data["number"])
+        assert masked_card_number == data["expected"]
 
 
 def test_get_mask_card_number_short(short_card_numbers: List[int]) -> None:
