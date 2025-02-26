@@ -1,6 +1,8 @@
+from typing import Dict, List
+
 import pytest
+
 from src.widget import get_date, mask_account_card
-from typing import List, Dict
 
 
 # Фикстура для тестовых данных по маскировке карты

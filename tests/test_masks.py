@@ -1,6 +1,8 @@
+from typing import Dict, List
+
 import pytest
+
 from src.mask import get_mask_account, get_mask_card_number
-from typing import List, Dict
 
 
 # Фикстура для номеров карт
