@@ -1,27 +1,37 @@
-# Card_Bank
+# <<<Card_Bank>>>
 
 ## Описание
 Проект предоставляет функции для маскировки номеров банковских карт и счетов.
 
-## Установка 
-
+## Установка
 1.  Клонируйте репозиторий:
     """
     git clone https://github.com/Carplatinum/project_card.git
     """
 2.  Перейдите в директорию проекта:
     """
-    cd C:\Users\ANDRAQ\Desktop\python_work\python_projects\card_bank>
+    cd C:\Users\ANTAQ\Desktop\PythonProjects\PyCharmProjects\project_card> 
+
     """
 3.  Установите зависимости:
     """
     pip install -r requirements.txt
     """
 # Использование 
-Проект используется для маскировки номеров банковских карт и счетов. 
+Проект используется для маскировки номеров банковских карт и счетов.
+
+## Тестирование
+В проекте реализовано полное тестирование всех функций с использованием фреймворка `pytest`.
+
+### Запуск тестов
+Тесты можно запустить командой:
+pytest --cov=src --cov-report=term --cov-report=html
+
+### Отчет о покрытии тестами
+Отчет о покрытии тестами доступен в формате HTML в папке `htmlcov`.
 
 # Лицензия
-Этот проект распространяется под лицензией [MIT License](LICENSE)]
+Этот проект распространяется под лицензией [MIT License](LICENSE)
 
 ## Авторы 
 [Антон] (https://github.com/Carplatinum)
