@@ -1,12 +1,15 @@
-import pytest
-from decorators import log
-from typing import Any
 from pathlib import Path
+from typing import Any
+
+import pytest
+
+from decorators import log
 
 
 # Фикстура для теста вывода в консоль
 @pytest.fixture
 def capsys(capsys: Any) -> Any:
+    """Фикстура для перехвата вывода в консоль."""
     return capsys
 
 
@@ -15,6 +18,7 @@ def test_log_console(capsys: Any) -> None:
 
     @log()
     def test_function(x: int, y: int) -> int:
+        """Тестовая функция для логирования."""
         return x + y
 
     test_function(1, 2)
@@ -28,6 +32,7 @@ def test_log_file(tmp_path: Path) -> None:
 
     @log(filename=str(filename))
     def test_function(x: int, y: int) -> int:
+        """Тестовая функция для логирования."""
         return x + y
 
     test_function(1, 2)
@@ -41,6 +46,7 @@ def test_log_error_console(capsys: Any) -> None:
 
     @log()
     def test_error_function(x: int, y: int) -> None:
+        """Тестовая функция для логирования ошибки."""
         raise ValueError("Ошибка")
 
     try:
@@ -57,6 +63,7 @@ def test_log_error_file(tmp_path: Path) -> None:
 
     @log(filename=str(filename))
     def test_error_function(x: int, y: int) -> None:
+        """Тестовая функция для логирования ошибки."""
         raise ValueError("Ошибка")
 
     try:
