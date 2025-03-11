@@ -1,7 +1,5 @@
-import logging
 import functools
-import sys
-from datetime import datetime
+
 
 def log(filename=None):
     """
