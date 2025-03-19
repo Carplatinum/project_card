@@ -3,19 +3,13 @@ from typing import Any, Callable, Optional
 
 
 def log(filename: Optional[str] = None) -> Callable:
-    """
-    Декоратор для логирования функций.
-    """
+    """Декоратор для логирования функций."""
 
     def decorator(func: Callable) -> Callable:
-        """
-        Внутренний декоратор, который обертывает функцию для логирования.
-        """
+        """Внутренний декоратор, который обертывает функцию для логирования."""
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
-            """
-            Обертка функции, которая выполняет логирование.
-            """
+            """Обертка функции, которая выполняет логирование."""
             try:
                 result = func(*args, **kwargs)
                 log_message = f"{func.__name__} ok"
