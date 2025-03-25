@@ -1,6 +1,19 @@
 import logging
 
+# Настройка логера для модуля masks
 masks_logger = logging.getLogger("masks")
+masks_logger.setLevel(logging.DEBUG)
+
+# Создаем file_handler для записи логов в файл
+file_handler = logging.FileHandler("logs/masks.log", mode="w")
+file_handler.setLevel(logging.DEBUG)
+
+# Создаем форматтер для логов
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+file_handler.setFormatter(formatter)
+
+# Добавляем handler к логеру
+masks_logger.addHandler(file_handler)
 
 def get_mask_card_number(card_number: int) -> str:
     """
