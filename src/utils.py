@@ -1,6 +1,5 @@
-import logging
 import json
-
+import logging
 from datetime import datetime
 from typing import Dict, List
 
@@ -19,6 +18,7 @@ file_handler.setFormatter(formatter)
 # Добавляем handler к логеру
 utils_logger.addHandler(file_handler)
 
+
 def filter_by_state(data: List[Dict], state: str = 'EXECUTED') -> List[Dict]:
     """
     Фильтрует список словарей по значению ключа 'state'.
@@ -30,6 +30,7 @@ def filter_by_state(data: List[Dict], state: str = 'EXECUTED') -> List[Dict]:
     except Exception as e:
         utils_logger.error(f"Ошибка при фильтрации данных: {e}")
         raise
+
 
 def sort_by_date(data: List[Dict], reverse: bool = True) -> List[Dict]:
     """
@@ -43,19 +44,11 @@ def sort_by_date(data: List[Dict], reverse: bool = True) -> List[Dict]:
         utils_logger.error(f"Ошибка при сортировке данных: {e}")
         raise
 
+
 def read_json_file(file_path: str) -> List[Dict]:
     """
     Чтение JSON-файла и возврат данных в виде списка словарей.
-    Если файл пустой или содержит некорректный JSON, вызывается ValueError.
     """
-    try:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            content = file.read().strip()
-            if not content:  # Если файл пустой, возвращаем пустой список
-                return []
-            data = json.loads(content)
-            return data
-    except FileNotFoundError:
-        raise FileNotFoundError(f"Файл {file_path} не найден")
-    except json.JSONDecodeError:
-        raise ValueError(f"Файл {file_path} содержит некорректный JSON")
+    with open(file_path, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+    return data

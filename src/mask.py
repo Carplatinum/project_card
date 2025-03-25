@@ -15,6 +15,7 @@ file_handler.setFormatter(formatter)
 # Добавляем handler к логеру
 masks_logger.addHandler(file_handler)
 
+
 def get_mask_card_number(card_number: int) -> str:
     """
     Возвращает замаскированный номер карты в формате XXXX XX** **** XXXX.
@@ -30,6 +31,7 @@ def get_mask_card_number(card_number: int) -> str:
     except ValueError as e:
         masks_logger.error(f"Ошибка при маскировании номера карты: {e}")
         raise
+
 
 def get_mask_account(account_number: int) -> str:
     """
