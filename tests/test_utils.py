@@ -1,7 +1,7 @@
 import pytest
+import json
 from pathlib import Path
 from src.utils import read_json_file
-import json
 
 
 def test_read_json_file(tmp_path: Path) -> None:
@@ -17,14 +17,14 @@ def test_read_json_file(tmp_path: Path) -> None:
 def test_read_json_file_empty(tmp_path: Path) -> None:
     """Тест чтения пустого JSON-файла."""
     file_path = tmp_path / "empty.json"
-    with open(file_path, 'w'):  # Убрали присваивание переменной f
+    with open(file_path, 'w'):
         pass
     with pytest.raises(json.decoder.JSONDecodeError):
         read_json_file(str(file_path))
 
 
 def test_read_json_file_not_found(tmp_path: Path) -> None:
-    """Тест попытки прочитать несуществующий JSON-файл."""
+    """Тест попытки прочитать несуществующий JSON-файла."""
     file_path = tmp_path / "not_found.json"
     with pytest.raises(FileNotFoundError):
         read_json_file(str(file_path))

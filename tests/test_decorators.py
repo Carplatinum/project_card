@@ -1,8 +1,6 @@
+import pytest
 from pathlib import Path
 from typing import Any
-
-import pytest
-
 from decorators import log
 
 

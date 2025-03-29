@@ -1,9 +1,6 @@
-import os
 import requests
-from dotenv import load_dotenv
+import os
 from typing import Dict
-
-load_dotenv()  # Загрузка переменных окружения
 
 
 def convert_currency(transaction: Dict) -> float:
