@@ -1,7 +1,9 @@
+import re
 import json
 import logging
 from datetime import datetime
 from typing import Any, Dict, List
+from collections import Counter
 
 # Настройка логера для модуля utils
 utils_logger = logging.getLogger("utils")
@@ -25,7 +27,8 @@ def filter_by_state(data: List[Dict[str, Any]], state: str = 'EXECUTED') -> List
     """
     try:
         filtered_data = [item for item in data if item.get('state') == state]
-        utils_logger.info(f"Успешно отфильтровано по состоянию '{state}': {len(filtered_data)} записей")
+        message = f"Успешно отфильтровано по состоянию '{state}': {len(filtered_data)} записей"
+        utils_logger.info(message)
         return filtered_data
     except Exception as e:
         utils_logger.error(f"Ошибка при фильтрации данных: {e}")
@@ -38,7 +41,8 @@ def sort_by_date(data: List[Dict[str, Any]], reverse: bool = True) -> List[Dict[
     """
     try:
         sorted_data = sorted(data, key=lambda x: datetime.fromisoformat(x['date']), reverse=reverse)
-        utils_logger.info(f"Успешно отсортировано по дате: {len(sorted_data)} записей")
+        message = f"Успешно отсортировано по дате: {len(sorted_data)} записей"
+        utils_logger.info(message)
         return sorted_data
     except Exception as e:
         utils_logger.error(f"Ошибка при сортировке данных: {e}")
@@ -52,3 +56,41 @@ def read_json_file(file_path: str) -> List[Dict[Any, Any]]:
     with open(file_path, 'r', encoding='utf-8') as file:
         data: List[Dict[Any, Any]] = json.load(file)
     return data
+
+
+def filter_by_description(transactions: List[Dict[str, Any]], search_string: str) -> List[Dict[str, Any]]:
+    """
+    Фильтрует список транзакций по заданной строке в описании, используя регулярные выражения.
+
+    :param transactions: Список словарей с данными о банковских операциях.
+    :param search_string: Строка для поиска в описании операций.
+    :return: Список словарей с операциями, у которых в описании есть данная строка.
+    """
+    try:
+        filtered_transactions = [
+            transaction for transaction in transactions
+            if re.search(search_string, transaction.get('description', ''), re.IGNORECASE)
+        ]
+        message = (
+            f"Успешно отфильтровано по описанию '{search_string}': "
+            f"{len(filtered_transactions)} записей"
+        )
+        utils_logger.info(message)
+        return filtered_transactions
+    except Exception as e:
+        utils_logger.error(f"Ошибка при фильтрации по описанию: {e}")
+        raise
+
+
+def count_transaction_categories(transactions: List[Dict[str, Any]]) -> Dict[str, int]:
+    """
+    Подсчитывает количество банковских операций определенного типа.
+    """
+    try:
+        descriptions = [transaction.get('description', '') for transaction in transactions]
+        category_counts = Counter(descriptions)
+        utils_logger.info(f"Успешно подсчитаны категории транзакций: {category_counts}")
+        return dict(category_counts)
+    except Exception as e:
+        utils_logger.error(f"Ошибка при подсчете категорий транзакций: {e}")
+        raise
