@@ -10,7 +10,8 @@ def read_csv_file(file_path: str) -> List[Dict[Hashable, Any]]:
     :return: Список транзакций в виде словарей.
     """
     try:
-        df: DataFrame = pd.read_csv(file_path)
+        # Указываем разделитель ';' для корректного чтения файла
+        df: DataFrame = pd.read_csv(file_path, delimiter=';')
         transactions: List[Dict[Hashable, Any]] = df.to_dict(orient='records')
         return transactions
     except Exception as e:
