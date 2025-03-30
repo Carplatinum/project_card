@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
 from typing import Any
-from decorators import log
+from src.decorators import log
 
 
 # Фикстура для теста вывода в консоль
